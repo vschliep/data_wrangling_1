@@ -352,3 +352,31 @@ litters_df
     ## # ℹ 39 more rows
     ## # ℹ 3 more variables: `Pups born alive` <dbl>, `Pups dead @ birth` <dbl>,
     ## #   `Pups survive` <dbl>
+
+## Other file types
+
+Import an xlsx file first… csv are really simply/cleanly structured.
+Excel are not simple. There is a whole separate package for reading
+excel files.
+
+\#load read excel package
+
+``` r
+library(readxl)
+```
+
+``` r
+mlb_df=
+  read_excel("data/mlb11.xlsx")
+```
+
+Import a SAS file
+
+``` r
+library(haven)
+```
+
+``` r
+pulse_df =
+  read_sas("data/public_pulse_data.sas7bdat")
+```
