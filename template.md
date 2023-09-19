@@ -149,3 +149,206 @@ Data summary
 | Pups born alive   |         0 |          1.00 |  7.35 | 1.76 |  3.0 |  6.00 |  8.00 |  8.00 | 11.0 | ▁▃▂▇▁ |
 | Pups dead @ birth |         0 |          1.00 |  0.33 | 0.75 |  0.0 |  0.00 |  0.00 |  0.00 |  4.0 | ▇▂▁▁▁ |
 | Pups survive      |         0 |          1.00 |  6.41 | 2.05 |  1.0 |  5.00 |  7.00 |  8.00 |  9.0 | ▁▃▂▇▇ |
+
+\##Options are in read\_\*
+
+``` r
+litters_df
+```
+
+    ## # A tibble: 49 × 8
+    ##    Group `Litter Number` `GD0 weight` `GD18 weight` `GD of Birth`
+    ##    <chr> <chr>                  <dbl>         <dbl>         <dbl>
+    ##  1 Con7  #85                     19.7          34.7            20
+    ##  2 Con7  #1/2/95/2               27            42              19
+    ##  3 Con7  #5/5/3/83/3-3           26            41.4            19
+    ##  4 Con7  #5/4/2/95/2             28.5          44.1            19
+    ##  5 Con7  #4/2/95/3-3             NA            NA              20
+    ##  6 Con7  #2/2/95/3-2             NA            NA              20
+    ##  7 Con7  #1/5/3/83/3-3/2         NA            NA              20
+    ##  8 Con8  #3/83/3-3               NA            NA              20
+    ##  9 Con8  #2/95/3                 NA            NA              20
+    ## 10 Con8  #3/5/2/2/95             28.5          NA              20
+    ## # ℹ 39 more rows
+    ## # ℹ 3 more variables: `Pups born alive` <dbl>, `Pups dead @ birth` <dbl>,
+    ## #   `Pups survive` <dbl>
+
+``` r
+  read_csv(
+    "data/FAS_litters.csv",
+    skip = 10, col_names = FALSE)
+```
+
+    ## Rows: 40 Columns: 8
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (2): X1, X2
+    ## dbl (6): X3, X4, X5, X6, X7, X8
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+    ## # A tibble: 40 × 8
+    ##    X1    X2                 X3    X4    X5    X6    X7    X8
+    ##    <chr> <chr>           <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+    ##  1 Con8  #3/5/2/2/95      28.5  NA      20     8     0     8
+    ##  2 Con8  #5/4/3/83/3      28    NA      19     9     0     8
+    ##  3 Con8  #1/6/2/2/95-2    NA    NA      20     7     0     6
+    ##  4 Con8  #3/5/3/83/3-3-2  NA    NA      20     8     0     8
+    ##  5 Con8  #2/2/95/2        NA    NA      19     5     0     4
+    ##  6 Con8  #3/6/2/2/95-3    NA    NA      20     7     0     7
+    ##  7 Mod7  #59              17    33.4    19     8     0     5
+    ##  8 Mod7  #103             21.4  42.1    19     9     1     9
+    ##  9 Mod7  #1/82/3-2        NA    NA      19     6     0     6
+    ## 10 Mod7  #3/83/3-2        NA    NA      19     8     0     8
+    ## # ℹ 30 more rows
+
+\##Look at NA Values.
+
+``` r
+litters_df
+```
+
+    ## # A tibble: 49 × 8
+    ##    Group `Litter Number` `GD0 weight` `GD18 weight` `GD of Birth`
+    ##    <chr> <chr>                  <dbl>         <dbl>         <dbl>
+    ##  1 Con7  #85                     19.7          34.7            20
+    ##  2 Con7  #1/2/95/2               27            42              19
+    ##  3 Con7  #5/5/3/83/3-3           26            41.4            19
+    ##  4 Con7  #5/4/2/95/2             28.5          44.1            19
+    ##  5 Con7  #4/2/95/3-3             NA            NA              20
+    ##  6 Con7  #2/2/95/3-2             NA            NA              20
+    ##  7 Con7  #1/5/3/83/3-3/2         NA            NA              20
+    ##  8 Con8  #3/83/3-3               NA            NA              20
+    ##  9 Con8  #2/95/3                 NA            NA              20
+    ## 10 Con8  #3/5/2/2/95             28.5          NA              20
+    ## # ℹ 39 more rows
+    ## # ℹ 3 more variables: `Pups born alive` <dbl>, `Pups dead @ birth` <dbl>,
+    ## #   `Pups survive` <dbl>
+
+``` r
+  read_csv("data/FAS_litters.csv",
+    na = c("NA", 19))
+```
+
+    ## Rows: 49 Columns: 8
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (2): Group, Litter Number
+    ## dbl (6): GD0 weight, GD18 weight, GD of Birth, Pups born alive, Pups dead @ ...
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+    ## # A tibble: 49 × 8
+    ##    Group `Litter Number` `GD0 weight` `GD18 weight` `GD of Birth`
+    ##    <chr> <chr>                  <dbl>         <dbl>         <dbl>
+    ##  1 Con7  #85                     19.7          34.7            20
+    ##  2 Con7  #1/2/95/2               27            42              NA
+    ##  3 Con7  #5/5/3/83/3-3           26            41.4            NA
+    ##  4 Con7  #5/4/2/95/2             28.5          44.1            NA
+    ##  5 Con7  #4/2/95/3-3             NA            NA              20
+    ##  6 Con7  #2/2/95/3-2             NA            NA              20
+    ##  7 Con7  #1/5/3/83/3-3/2         NA            NA              20
+    ##  8 Con8  #3/83/3-3               NA            NA              20
+    ##  9 Con8  #2/95/3                 NA            NA              20
+    ## 10 Con8  #3/5/2/2/95             28.5          NA              20
+    ## # ℹ 39 more rows
+    ## # ℹ 3 more variables: `Pups born alive` <dbl>, `Pups dead @ birth` <dbl>,
+    ## #   `Pups survive` <dbl>
+
+\#Column types
+
+``` r
+litters_df  
+```
+
+    ## # A tibble: 49 × 8
+    ##    Group `Litter Number` `GD0 weight` `GD18 weight` `GD of Birth`
+    ##    <chr> <chr>                  <dbl>         <dbl>         <dbl>
+    ##  1 Con7  #85                     19.7          34.7            20
+    ##  2 Con7  #1/2/95/2               27            42              19
+    ##  3 Con7  #5/5/3/83/3-3           26            41.4            19
+    ##  4 Con7  #5/4/2/95/2             28.5          44.1            19
+    ##  5 Con7  #4/2/95/3-3             NA            NA              20
+    ##  6 Con7  #2/2/95/3-2             NA            NA              20
+    ##  7 Con7  #1/5/3/83/3-3/2         NA            NA              20
+    ##  8 Con8  #3/83/3-3               NA            NA              20
+    ##  9 Con8  #2/95/3                 NA            NA              20
+    ## 10 Con8  #3/5/2/2/95             28.5          NA              20
+    ## # ℹ 39 more rows
+    ## # ℹ 3 more variables: `Pups born alive` <dbl>, `Pups dead @ birth` <dbl>,
+    ## #   `Pups survive` <dbl>
+
+``` r
+  read_csv(
+    "data/FAS_litters.csv",
+    col_types = 
+      cols(
+        Group = col_factor()
+      ))
+```
+
+    ## # A tibble: 49 × 8
+    ##    Group `Litter Number` `GD0 weight` `GD18 weight` `GD of Birth`
+    ##    <fct> <chr>                  <dbl>         <dbl>         <dbl>
+    ##  1 Con7  #85                     19.7          34.7            20
+    ##  2 Con7  #1/2/95/2               27            42              19
+    ##  3 Con7  #5/5/3/83/3-3           26            41.4            19
+    ##  4 Con7  #5/4/2/95/2             28.5          44.1            19
+    ##  5 Con7  #4/2/95/3-3             NA            NA              20
+    ##  6 Con7  #2/2/95/3-2             NA            NA              20
+    ##  7 Con7  #1/5/3/83/3-3/2         NA            NA              20
+    ##  8 Con8  #3/83/3-3               NA            NA              20
+    ##  9 Con8  #2/95/3                 NA            NA              20
+    ## 10 Con8  #3/5/2/2/95             28.5          NA              20
+    ## # ℹ 39 more rows
+    ## # ℹ 3 more variables: `Pups born alive` <dbl>, `Pups dead @ birth` <dbl>,
+    ## #   `Pups survive` <dbl>
+
+``` r
+litters_df  
+```
+
+    ## # A tibble: 49 × 8
+    ##    Group `Litter Number` `GD0 weight` `GD18 weight` `GD of Birth`
+    ##    <chr> <chr>                  <dbl>         <dbl>         <dbl>
+    ##  1 Con7  #85                     19.7          34.7            20
+    ##  2 Con7  #1/2/95/2               27            42              19
+    ##  3 Con7  #5/5/3/83/3-3           26            41.4            19
+    ##  4 Con7  #5/4/2/95/2             28.5          44.1            19
+    ##  5 Con7  #4/2/95/3-3             NA            NA              20
+    ##  6 Con7  #2/2/95/3-2             NA            NA              20
+    ##  7 Con7  #1/5/3/83/3-3/2         NA            NA              20
+    ##  8 Con8  #3/83/3-3               NA            NA              20
+    ##  9 Con8  #2/95/3                 NA            NA              20
+    ## 10 Con8  #3/5/2/2/95             28.5          NA              20
+    ## # ℹ 39 more rows
+    ## # ℹ 3 more variables: `Pups born alive` <dbl>, `Pups dead @ birth` <dbl>,
+    ## #   `Pups survive` <dbl>
+
+``` r
+  read_csv(
+    "data/FAS_litters.csv",
+    col_types = 
+      cols(
+        'GD0 weight' = col_character()
+      ))
+```
+
+    ## # A tibble: 49 × 8
+    ##    Group `Litter Number` `GD0 weight` `GD18 weight` `GD of Birth`
+    ##    <chr> <chr>           <chr>                <dbl>         <dbl>
+    ##  1 Con7  #85             19.7                  34.7            20
+    ##  2 Con7  #1/2/95/2       27                    42              19
+    ##  3 Con7  #5/5/3/83/3-3   26                    41.4            19
+    ##  4 Con7  #5/4/2/95/2     28.5                  44.1            19
+    ##  5 Con7  #4/2/95/3-3     <NA>                  NA              20
+    ##  6 Con7  #2/2/95/3-2     <NA>                  NA              20
+    ##  7 Con7  #1/5/3/83/3-3/2 <NA>                  NA              20
+    ##  8 Con8  #3/83/3-3       <NA>                  NA              20
+    ##  9 Con8  #2/95/3         <NA>                  NA              20
+    ## 10 Con8  #3/5/2/2/95     28.5                  NA              20
+    ## # ℹ 39 more rows
+    ## # ℹ 3 more variables: `Pups born alive` <dbl>, `Pups dead @ birth` <dbl>,
+    ## #   `Pups survive` <dbl>
