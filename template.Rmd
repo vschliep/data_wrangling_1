@@ -19,4 +19,39 @@ litters_df =
   janitor::clean_names(litters_df)
 ```
 
+Let's import the `FAS_pups.csv` csv using a relative path.
+
+```{r}
+pups_df = 
+  read_csv("data/FAS_pups.csv")
+```
+
+pups_df = 
+  janitor::clean_names(pups_df)
+```
+
+
+##Look at data
+
+```{r}
+litters_df
+```
+
+head(litters_df)
+
+tail(litters_df)
+
+Looking at entire dataset: you can use "view"
+
+```{r, eval = FALSE}
+view(litters_df)
+```
+
+```{r}
+str(litters_df)
+```
+
+```{r}
+skimr::skim(litters_df)
+```
 
