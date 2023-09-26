@@ -103,9 +103,6 @@ Import an xlsx file first... csv are really simply/cleanly structured. Excel are
 
 #load read excel package
 
-```{r}
-library(readxl)
-```
 
 
 ```{r}
@@ -124,5 +121,13 @@ library(haven)
 ```{r}
 pulse_df =
   read_sas("data/public_pulse_data.sas7bdat")
+```
+
+
+## Base R
+
+```{r}
+litters_df =
+  read.csv("data/FAS_litters.csv")
 ```
 
