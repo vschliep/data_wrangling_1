@@ -24,3 +24,96 @@ pups_df =
 pups_df = janitor::clean_names(pups_df)
 ```
 
+## `select` is used to select columns!
+Put in your data frame `litters_df`, then the columns you want it to keep.
+When you put in the colon, it pulls in everything in between those two variables.
+If you use ##starts_with("pups"), it will pull in every variable that starts with pups. Also is an "ends with" and a "contains" options.
+You can remove variables by subtracting.
+Can use ###everything function to keep everything except what you are referring to.
+
+```{r}
+select(litters_df, group, litter_number, gd0_weight)
+
+select(litters_df, gd0_weight:gd_of_birth, group)
+
+select(litters_df, -litter_number)
+
+select(litters_df, group, litter_id = litter_number)
+
+select(litters_df, group, litter_id = litter_number, everything())
+```
+
+`select` vs. `pull`
+
+```{r}
+select(litters_df, group)
+```
+
+Put a data frame in, get a data frame out, doesn't care that there is only one variable.
+
+```{r}
+pull(litters_df, group)
+```
+Extracts a column from your dataframe, now it's just like a vector, it no longer exists inside the dataframe. Pull is still better than a $, because it is still a tidyverse function, and you know it's going to come out as a vector. If you need to get something out of a dataframe, use `pull`, it's much better than the $.
+
+You can reorganize things a bit with `rename` and `relocate` Relocate will bring that variable to be the first column.
+
+```{r}
+rename(litters_df, litter_id = litter_number)
+relocate(litters_df, litter_number)
+```
+
+
+Practicing
+
+```{r}
+select(litters_df, litter_number)
+```
+
+```{r}
+select(litters_df, pups_survive)
+```
+
+
+These `select` code lines do NOT save the selected columns to be the dataframe. Essentially just temporarily extracting them... would need to do ##litters_df = select(###) for it to save the selection as the new dataframe and overwrite the old dataframe of litters_df
+
+Get rid of rows using `filter()`. Below means "keep everywhere that group variable is equal to this value... one equal sign means put this value into the variable, two equals signs means, check if this thing is true. Keep everywhere that this turns out to be true.
+
+```{r}
+filter(litters_df, group == "Con7")
+```
+
+A bit more complicated. WIth select, you name the variables you want to keep. Filtering is based on something that exists inside the dataframe... get rid of mod7 group, keep pups born on gestational day 20... keep this or don't keep this. Logical conditions. Where this really becomes an important component.
+
+```{r}
+filter(litters_df, group == "Mod8")
+```
+
+Exclamation point != means "not equal to"
+
+```{r}
+filter(litters_df, gd0_weight > 20)
+filter(litters_df, gd0_weight <= 20)
+filter(litters_df, group == "Con7" | group == "Con8")
+```
+
+##The vertical bar means "OR" (|)##
+
+## %in% also an OR
+```{r}
+filter(litters_df, group %in% c("Con7", "Con8"))
+```
+
+
+```{r}
+filter(litters_df, !(group == "Con7"))
+```
+##Filtere where group is not equal to
+
+Can also combine terms...
+
+```{r}
+filter(litters_df, group %in% c("Con7", "Con8"), gd0_weight > 20) 
+```
+
+##Filter the dataframe so that group is con7 or con8 and gd0 weight is greater than 20.
