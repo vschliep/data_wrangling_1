@@ -117,3 +117,60 @@ filter(litters_df, group %in% c("Con7", "Con8"), gd0_weight > 20)
 ```
 
 ##Filter the dataframe so that group is con7 or con8 and gd0 weight is greater than 20.
+
+
+## `mutate` is used to add or change variables.
+
+```{r}
+mutate(litters_df, wt_gain = gd18_weight - gd0_weight)
+```
+
+
+```{r}
+mutate(litters_df, group = str_to_lower(group))
+```
+
+
+you can put as many `mutate` functions together in one command as you want
+```{r}
+mutate(
+  litters_df,
+  wt_gain = gd18_weight - gd0_weight,
+  group = str_to_lower(group))
+```
+
+
+## if you need to omit missing values, that is more of a filtering rows issue. Drop NA function will get rid of missing values anywhere, and you can also specify certain columns to drop missing values.
+
+```{r}
+drop_na(litters_df)
+drop_na(litters_df, gd0_weight)
+```
+
+
+## `arrange` works the same way, puts it in order of the values, either alphabetic or numeric, of the data points in each column
+
+```{r}
+arrange(litters_df, gd0_weight)
+```
+
+
+## pipes. Two years ago, everyone was writing coder and putting it online and the only one that existed looke like %>%. Moving forward, mroe and more people are using |>, and most people are using this. They both exist, it doesn't really matter which you use, anytime you load tidyverse you have access to both and in MOST cases they will give you the same info. Shortcut on a Mac is shift + CMD + M, which puts in this "and then." Puts two lines of code together.
+
+
+With the code below, I will create the dataframe, read in the data, clean the names, get rid of everything that starts with "pups," then create two new varibles via `mutate` then drop missing variables, and then arrange by group and weight gain.
+
+Generally speaking, this is how we would import dataset and create a dataframe. Manipulate the data and then just save that. And this is your save, until you get to the actual analysis portion, which will be a different set of code.
+```{r}
+litters_df =
+  read_csv("data/FAS_litters.csv") |> 
+  janitor::clean_names() |> 
+  select(-starts_with("pups")) |> 
+  mutate(
+    group = str_to_lower(group),
+    wt_gain = gd18_weight - gd0_weight,
+  ) |> 
+  drop_na(wt_gain) |> 
+  arrange(group, wt_gain)
+```
+
